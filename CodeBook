@@ -1,0 +1,43 @@
+Code Book for Getting and Cleaning Data Final Project
+
+Tidy data set from this project is located in seconddata.txt.
+Readme.md contains background information on the data set
+The run_analysis.R script contains all the steps used to to create the data set in seconddata.txt. These steps were:
+
+1. Downloading and extract the data set from the folder called UCI HAR Dataset
+
+2. Assign variables to data
+  a. activity_labels for the data from activity_labels.txt. 6 rows x 2 columns of data listing activities performed when measurements were taken with codes/labels.
+  b. features for the data from features.txt. 561 x 2 of data showing accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ.
+  c. subject_test for the data from subject_test.txt. 2947 x 1 containing test data of 9/30 volunteer test subjects being observed.
+  d. x_test for the data from X_test.txt. 2947 x 561 containing recorded features test data.
+  e. y_test for the data from y_test.txt. 2947 x 1 containing test data for activities.
+  f. subject_train for the data from subject_train.txt. 7352 x 1 containing train data for 21/30 volunteer subjects being observed.
+  g. x_train for the data from X_train.txt. 7352 x 561 containing recorded features training data.
+  h. y_train for the data from y_train.txt. 7352 x 1 containing training data for activities.
+
+3. Merging the training and test sets to create one data set
+  a. x created by merging x_train and x_test with the rbind() function to create data with dimensions 10299 x 561
+  b. y created by merging y_train and y_test with the rbind() function to create data with dimensions 10299 x 1
+  c. subject created by merging subject_train and subject_test with the rbind() function to create data with dimensions 10299 x 1
+  d. data_merged created by merging x, y, and subject with the cbind() function to create data with dimensions 10299 x 563.
+  
+4. Extract only the mean and standard deviation measurements into tidydata, dimensions 10299 x 88, by subsetting data_merged while selecting columns subject, code, and the mean and standard deviation of each measurement.
+
+5. Descriptive activity names used to name the activities in the data set. Numbers in code from tidydata replaced by second column of activities_labels
+
+6. Data set labeled with descriptive variable names.
+  a. Code column renamed "activity"
+  b. All occurences of "Acc" renamed "Accelerometer"
+  c. All occurences of "angle" renamed "Angle"
+  d. All occurences of "BodyBody" renamed "Body"
+  e. All occurences of "-freq()" and "^f" renamed "Frequency"
+  f. All occurences of "gravity" renamed "Gravity"
+  g. All occurences of "Gyro" renamed "Gyroscope"
+  h. All occurences of "Mag" renamed "Magnitude"
+  i. All occurences of "-mean()" renamed "Mean"
+  j. All occurences of "-std()" renamed "Standard Deviation"
+  k. All occurences of "^t" renamed "Time"
+  l. All occurences of "tBody" renamed "TimeBody"
+  
+7. From the data in step 4, tidy data set with the average of each activity and subject created and put in seconddata.txt which has dimensions 180 x 88
